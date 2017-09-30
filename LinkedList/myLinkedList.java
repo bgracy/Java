@@ -10,33 +10,33 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 			myHead = head;
 			myTail = tail;
 		}
-		public AnyType			myData;
-		public Node<AnyType>	myHead;		// next
-		public Node<AnyType>	myTail;		// previous
+		public AnyType myData;
+		public Node<AnyType> myHead;		// next
+		public Node<AnyType> myTail;		// previous
 	}
 	
 	
 	// myLinkedList Constructor
-	public					myLinkedList			()
+	public myLinkedList ()
 	{
 		beginMarker = 	null;
-		endMarker	=	null;
-		theSize 	= 	0;		
+		endMarker =	null;
+		theSize = 	0;		
 	}
 	
 	
 	// myLinkedList Functions/Methods
-	public	void	clear	()
+	public void clear ()
 	{
 		beginMarker = new Node<AnyType> (null, null, null);
-		endMarker	= beginMarker;
-		theSize		= 0;
-		//modCount++;??????????
+		endMarker = beginMarker;
+		theSize	= 0;
+		//modCount++;
 	}
 	
 	
-	public	int			size 	()					{ return theSize; }
-	public	boolean		exist	(AnyType newVal)			
+	public int size () { return theSize; }
+	public	boolean	exist( AnyType newVal)			
 	{
 		if (theSize == 0)
 			return false;
@@ -60,18 +60,18 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 	{
 		if (theSize == 0)
 		{
-			Node<AnyType> head	= new Node<AnyType> (newVal, null, null);
-			beginMarker 		= head;
-			endMarker			= head;
+			Node<AnyType> head = new Node<AnyType> (newVal, null, null);
+			beginMarker = head;
+			endMarker = head;
 			theSize++;
 			modCount++;
 			return true;
 		}
 		else
 		{
-			Node<AnyType> newNode	= new Node<AnyType> (newVal, null, endMarker);
-			endMarker.myHead		= newNode;
-			endMarker				= newNode;
+			Node<AnyType> newNode = new Node<AnyType> (newVal, null, endMarker);
+			endMarker.myHead = newNode;
+			endMarker = newNode;
 			theSize++;
 			modCount++;
 			return	true;
@@ -97,9 +97,9 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 			{
 				if (index == 1)
 				{
-					Node<AnyType>	newNode		= new Node<AnyType> (newVal, beginMarker, null);
-					beginMarker.myTail	= newNode;
-					beginMarker			= newNode;
+					Node<AnyType> newNode = new Node<AnyType> (newVal, beginMarker, null);
+					beginMarker.myTail = newNode;
+					beginMarker	= newNode;
 					theSize++;
 					modCount++;
 					return true;
@@ -108,9 +108,9 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 				{
 					if (index == (theSize + 1))
 					{
-						Node<AnyType>	newNode		= new Node<AnyType> (newVal, null, endMarker);
-						endMarker.myHead	= newNode;
-						endMarker			= newNode;
+						Node<AnyType>	newNode	= new Node<AnyType> (newVal, null, endMarker);
+						endMarker.myHead = newNode;
+						endMarker = newNode;
 						theSize++;
 						modCount++;
 						return true;
@@ -119,18 +119,18 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 					{
 						if (index <= theSize)
 						{
-							Node<AnyType>	newNode		= new Node<AnyType> (newVal, null, null);
-							Node<AnyType>	CurrentNode	= beginMarker;
-							int		Counter		= 1;
-							boolean	done		= false;
+							Node<AnyType> newNode = new Node<AnyType> (newVal, null, null);
+							Node<AnyType> CurrentNode = beginMarker;
+							int	Counter	= 1;
+							boolean	done = false;
 							while (done == false)
 							{ 
 								if (Counter == index)
 								{
-									newNode.myHead				= CurrentNode;
-									newNode.myTail				= CurrentNode.myTail;
-									CurrentNode.myTail.myHead	= newNode;
-									CurrentNode.myTail			= newNode;
+									newNode.myHead = CurrentNode;
+									newNode.myTail = CurrentNode.myTail;
+									CurrentNode.myTail.myHead = newNode;
+									CurrentNode.myTail = newNode;
 									theSize++;
 									modCount++;
 									done = true;
@@ -153,9 +153,9 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 	}
 	
 	
-	public	Node<AnyType>	get	(AnyType nodeData)		// this is finding and getting a value within the list
-	{													// THE EXIST FUNCTION ABOVE MAY BE THIS FUNCTION ACTUALLY
-		Node<AnyType> 	CurrentNode	= beginMarker;
+	public	Node<AnyType> get (AnyType nodeData)		// this is finding and getting a value within the list
+	{
+		Node<AnyType> CurrentNode = beginMarker;
 		while (!(CurrentNode.equals (null)))
 		{
 			if (nodeData.equals(CurrentNode.myData))
@@ -174,11 +174,11 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 	}
 
 	
-	public	void	printList	()
+	public void	printList ()
 	{
 		if (theSize > 0)
 		{
-			Node<AnyType>	CurrentNode	= beginMarker;
+			Node<AnyType> CurrentNode = beginMarker;
 			do {
 				System.out.println (CurrentNode.myData);
 				CurrentNode = CurrentNode.myHead;
@@ -189,26 +189,26 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 	}
 	
 	
-	public	void	remove	(AnyType removeVal)			
+	public	void remove	(AnyType removeVal)			
 	{
 		if (theSize == 1)
 		{
 			if (removeVal.equals(beginMarker.myData))
 			{
 				Node<AnyType> head	= new Node<AnyType> (null, null, null);
-				beginMarker 		= head;
-				endMarker			= head;
-				theSize				= 0;
+				beginMarker = head;
+				endMarker = head;
+				theSize = 0;
 				modCount++;
 			}
 			else
-				System.out.println ("The value cannot be removed because it does not exist in the list.");
+				System.out.println ("The value does not exist in the list.");
 		}
 		else
 		{
 			if (exist (removeVal))
 			{
-				if (removeVal.equals(beginMarker.myData))		// if its the head node
+				if (removeVal.equals(beginMarker.myData))		// if it's the head node
 				{
 					beginMarker	= beginMarker.myHead;
 					beginMarker.myTail	= null;	
@@ -217,17 +217,17 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 				}
 				else
 				{
-					if (removeVal.equals(endMarker.myData))		// if its the tail node
+					if (removeVal.equals(endMarker.myData))		// if it's the tail node
 					{
-						endMarker			= endMarker.myTail;
-						endMarker.myHead	= null;
+						endMarker = endMarker.myTail;
+						endMarker.myHead = null;
 						theSize--;
 						modCount++;
 					}
 					else
-					{										// its somewhere in the middle of the list
-						Node<AnyType>	CurrentNode	= beginMarker;
-						boolean	done				= false;
+					{										// it's somewhere in the middle of the list
+						Node<AnyType> CurrentNode = beginMarker;
+						boolean	done = false;
 						while (done == false)
 						{
 							if (CurrentNode.myData.equals(removeVal))
@@ -247,12 +247,12 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 				}
 			}
 			else
-				System.out.println ("The value cannot be removed because it does not exist in the list.");
+				System.out.println ("The value does not exist in the list.");
 		}
 	}
 	
 	
-	public	java.util.Iterator <AnyType> iterator	()	{ return new LinkedListIterator (); }
+	public java.util.Iterator <AnyType> iterator ()	{ return new LinkedListIterator (); }
 	
 	
 	// myLinkedList data values
@@ -262,13 +262,13 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 	private	Node<AnyType>	endMarker;		// tail of the linked list
 	
 	
-	private class			LinkedListIterator implements java.util.Iterator<AnyType>
+	private class LinkedListIterator implements java.util.Iterator<AnyType>
 	{
-		private Node<AnyType> current 		= beginMarker.myHead;
-		private int		expectedModCount	= modCount;
-		private boolean	oktoRemove			= false;
+		private Node<AnyType> current = beginMarker.myHead;
+		private int	expectedModCount = modCount;
+		private boolean	oktoRemove = false;
 		
-		public	void	remove	()
+		public void remove ()
 		{
 			if (modCount != expectedModCount)
 				throw new java.util.ConcurrentModificationException ();
@@ -281,8 +281,8 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 		}
 		
 		
-		public	boolean	hasNext	()	{ return current != endMarker; }
-		public	AnyType	next	()
+		public	boolean	hasNext	() { return current != endMarker; }
+		public	AnyType	next ()
 		{
 			if (modCount != expectedModCount)
 				throw new java.util.ConcurrentModificationException ();
@@ -329,7 +329,7 @@ public class myLinkedList <AnyType> implements Iterable <AnyType>
 		myLinkedList <String> testList = new myLinkedList <String> ();
 		testList.add (new String ("hello"));
 		testList.add (new String ("this is"));
-		testList.add (new String ("cs3345 project 2"));
+		testList.add (new String ("Brad"));
 		System.out.println (" We have so far inserted " + testList.size () + " elements in the list");
 		testList.remove ("this is");
 		System.out.println (" Now, there are only " + testList.size () + " elements left in the list");
